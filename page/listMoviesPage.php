@@ -21,11 +21,9 @@ solid #D40013; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 
         </thead>
         <tbody>
             <?php
-$query = mysqli_query($con, "SELECT * FROM movies") or
-die(mysqli_error($con));
-
+$query = mysqli_query($con, "SELECT * FROM movies") or die(mysqli_error($con));
     if (mysqli_num_rows($query) == 0) {
-        echo '<tr> <td colspan="7"> Tidak ada data </td> </tr>';
+    echo '<tr> <td colspan="7"> Tidak ada data </td> </tr>';
     }else{
         $no = 1;
         while($data = mysqli_fetch_assoc($query)){
@@ -45,14 +43,15 @@ die(mysqli_error($con));
         </tr>';
         $no++;
         }
-}
-?>
+    }
+    ?>
         </tbody>
     </table>
 </div>
 </aside>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+        crossorigin="anonymous">
 </script>
 </body>
 
