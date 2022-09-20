@@ -9,35 +9,47 @@
 
         // tampung nilai yang ada di from ke variabel
         // sesuaikan variabel name yang ada di registerPage.php disetiap input
+
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $name = $_POST['name'];
         $phonenum = $_POST['phonenum'];
         $membership = $_POST['membership'];
-
-        // Melakukan insert ke databse dengan query dibawah ini
-        $query = mysqli_query($con,
+               
+        $query = mysqli_query($con, "SELECT * FROM users WHERE email = '$email'") or
+        die(mysqli_error($con));
+        
+        if(mysqli_num_rows($query) == 0){
+            // Melakukan insert ke database dengan query dibawah ini
+            $query = mysqli_query($con,
             "INSERT INTO users(email, password, name, phonenum, membership)
                 VALUES
-        ('$email', '$password', '$name', '$phonenum', '$membership')")
-             or die(mysqli_error($con)); // perintah mysql yang gagal dijalankan ditangani oleh perintah “or die”
+            ('$email', '$password', '$name', '$phonenum', '$membership')")
+            or die(mysqli_error($con)); // perintah mysql yang gagal dijalankan ditangani oleh perintah “or die”
 
-        if($query){
-            echo
+                if($query){
+                    echo
+                        '<script>
+                        alert("Register Success");
+                        window.location = "../index.php"
+                        </script>';
+                }else{
+                    echo
+                        '<script>
+                        alert("Register Failed");
+                        </script>';
+                }
+            }else{
+                echo
                 '<script>
-                alert("Register Success");
-                window.location = "../index.php"
+                    alert("Alamat email telah digunakan");
+                    window.location = "../index.php"
                 </script>';
-        }else{
-            echo
-                '<script>
-                alert("Register Failed");
-                </script>';
-        }
+            }
     }else{
-      echo
-       '<script>
+        echo
+        '<script>
         window.history.back()
         </script>';
-     }
+    }
 ?>

@@ -7,10 +7,10 @@
         // sesuaikan variabel name yang ada di registerPage.php disetiap input
         $email = $_POST['email'];
         $password = $_POST['password'];
-        // Melakukan insert ke databse dengan query dibawah ini
+        
         $query = mysqli_query($con, "SELECT * FROM users WHERE email = '$email'") or
         die(mysqli_error($con));
-        // ini buat ngecek kalo misalnya hasil dari querynya == 0 ato ga ketemu -> emailnya tdk ditemukan
+        
         if(mysqli_num_rows($query) == 0){
             echo
             '<script>
@@ -19,8 +19,7 @@
         }else{
                 $user = mysqli_fetch_assoc($query);
                 if(password_verify($password, $user['password'])){
-                    // session adalah variabel global sementara yang disimpen di server
-                    // buat mulai sessionnya pake session_start()
+                    
                     session_start();
                     //isLogin ini temp variable yang gunanya buat ngecek nanti apakah sdh login ato belum
                     $_SESSION['isLogin'] = true;
