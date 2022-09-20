@@ -15,12 +15,13 @@
         $name = $_POST['name'];
         $phonenum = $_POST['phonenum'];
         $membership = $_POST['membership'];
-               
+         
+        //email unik
         $query = mysqli_query($con, "SELECT * FROM users WHERE email = '$email'") or
         die(mysqli_error($con));
         
         if(mysqli_num_rows($query) == 0){
-            // Melakukan insert ke database dengan query dibawah ini
+            // Melakukan insert ke database dengan query dibawah in
             $query = mysqli_query($con,
             "INSERT INTO users(email, password, name, phonenum, membership)
                 VALUES

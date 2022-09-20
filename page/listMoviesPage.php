@@ -5,7 +5,11 @@ include '../component/sidebar.php'
 solid #D40013; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0,
 0.19);">
     <div class="body d-flex justify-content-between">
-        <h4>LIST MOVIE</h4>
+        <h4><b>LIST MOVIE</b></h4>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <a href="../page/addMoviesPage.php?id='.$data['id'].'"
+           onClick="return confirm ( \'Are you sure want to delete this
+           data?\')"> <i class="material-icons" style="font-size:48px;color:red">add_box</i></a> 
     </div>
     <hr>
     <table class="table ">
@@ -37,8 +41,7 @@ $query = mysqli_query($con, "SELECT * FROM movies") or die(mysqli_error($con));
             <td>
                 <a href="../process/deleteMovieProcess.php?id='.$data['id'].'"
                 onClick="return confirm ( \'Are you sure want to delete this
-                data?\')"> <i style="color: red" class="fa fa-trash fa-2x"></i>
-                </a>
+                data?\')"> <i style="color: red" class="fa fa-trash fa-2x"></i> </a>
             </td>
         </tr>';
         $no++;
@@ -53,6 +56,7 @@ $query = mysqli_query($con, "SELECT * FROM movies") or die(mysqli_error($con));
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
         crossorigin="anonymous">
 </script>
+
 </body>
 
 </html>
