@@ -7,9 +7,8 @@ solid #D40013; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 
     <div class="body d-flex justify-content-between">
         <h4><b>LIST MOVIE</b></h4>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <a href="../page/addMoviesPage.php?id='.$data['id'].'"
-           onClick="return confirm ( \'Are you sure want to delete this
-           data?\')"> <i class="material-icons" style="font-size:48px;color:red">add_box</i></a> 
+        <a href="../page/addMoviesPage.php?id='.$data['id'].'"> 
+            <i class="material-icons" style="font-size:48px;color:red">add_box</i></a> 
     </div>
     <hr>
     <table class="table ">
@@ -24,10 +23,10 @@ solid #D40013; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 
             </tr>
         </thead>
         <tbody>
-            <?php
-$query = mysqli_query($con, "SELECT * FROM movies") or die(mysqli_error($con));
+    <?php
+    $query = mysqli_query($con, "SELECT * FROM movies") or die(mysqli_error($con));
     if (mysqli_num_rows($query) == 0) {
-    echo '<tr> <td colspan="7"> Tidak ada data </td> </tr>';
+        echo '<tr> <td colspan="7"> Tidak ada data </td> </tr>';
     }else{
         $no = 1;
         while($data = mysqli_fetch_assoc($query)){
@@ -40,8 +39,10 @@ $query = mysqli_query($con, "SELECT * FROM movies") or die(mysqli_error($con));
             <td>'.$data['season'].'</td>
             <td>
                 <a href="../process/deleteMovieProcess.php?id='.$data['id'].'"
-                onClick="return confirm ( \'Are you sure want to delete this
-                data?\')"> <i style="color: red" class="fa fa-trash fa-2x"></i> </a>
+                onClick=" return confirm ( \'Are you sure want to delete this data?\')"> <i style="color: red" class="fa fa-trash fa-2x"></i> </a>
+
+                <a href="../page/editMoviesPage.php?id='.$data['id'].'"
+                onClick="return confirm ( \'Are you sure want to update this data?\')"> <i style="color: red" class="fa fa-edit fa-2x"></i> </a>
             </td>
         </tr>';
         $no++;
