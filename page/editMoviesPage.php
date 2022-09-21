@@ -11,45 +11,56 @@ solid #D40013; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 
         <a href="../page/listMoviesPage.php?id='.$data['id'].'"> 
             <i class="fa fa-arrow-left" style="font-size:30px;color:red"></i></a>  
     </div>
+    <hr>
 
-        <hr>
-        <form action="../process/editMoviesProcess.php" method="post">
-         <?php   
-            $id = $_GET['id'];
-            $query = mysqli_query($con, "SELECT * FROM movies where id='$id'") or die(mysqli_error($con));
-            $nomor = 1;
-            while($data = mysql_fetch_array($query_mysql)){
-         ?>
-         <div class="mb-3">
-                <label for="exampleInputMovies" class="formlabel">Name</label>
-                <input class="form-control" id="name" name="name" value=" <?php echo $data['name'] ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputMovies" class="formlabel">Genre</label>
-                        <select class="form-select" aria-label="Default select example" name="genre" id="genre">
-                                <option disabled selected value></option>
-                                <option value="Comedy">Comedy</option>
-                                <option value="Romance">Romance</option>
-                                <option value="Horor">Horor</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputMovies" class="formlabel">Year Release</label>
-                        <input class="form-control" id="realese" name="realese" aria-describedby="movieHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputMovies" class="formlabel">Season</label>
-                        <input class="form-control" id="season" name="season" aria-describedby="movieHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputSynopsis" class="formlabel">Synopsis</label>
-                        <input class="form-control" id="synopsis" name="synopsis" aria-describedby="movieHelp">
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button style="background-color: black" type="submit" class="btn btn-primary" name="addMovies">Save</button>
-                    </div>  
-        </form>
-        <?php } ?>
+    <?php
+        // session_start();
+            if(isset($_GET['id'])){
+                include ('../db.php');
+                $id = $_GET['id'];
+                $queryEdit = mysqli_query($con, "SELECT * FROM movies WHERE id='$id'") or
+                die(mysqli_error($con));
+                $nomor = 1;   
+            }else {
+                echo
+                '<script>
+
+                </script>';
+            }
+        while($data = mysqli_fetch_array($queryEdit)){
+        ?>
+            <form action="../process/editMovieProcess.php" method="post"> 
+            <div class="mb-3">
+                    <label for="exampleInputMovies" class="formlabel">Name</label>
+                    <input class="form-control" id="name" name="name" value=" <?php echo $data['name'] ?>">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputMovies" class="formlabel">Genre</label>
+                <select class="form-select" aria-label="Default select example" name="genre" id="genre">
+                        <option diasbled value="Selected"><?php echo $data['genre'] ?></option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Horor">Horor</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputMovies" class="formlabel">Year Release</label>
+                <input class="form-control" id="realese" name="realese" value=" <?php echo $data['realese'] ?>">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputMovies" class="formlabel">Season</label>
+                <input class="form-control" id="season" name="season" value=" <?php echo $data['season'] ?>">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputSynopsis" class="formlabel">Synopsis</label>
+                <input class="form-control" id="synopsis" name="synopsis" value=" <?php echo $data['synopsis'] ?>">
+            </div>
+            <div class="d-grid gap-2">
+                <button style="background-color: black" type="submit" class="btn btn-primary" name="editMovies">Save</button>
+            </div>  
+            </form>
+    <?php } ?>
+          
 </body>
 
 </html>
