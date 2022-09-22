@@ -16,6 +16,7 @@
         // session_start();
         if(isset($_POST['editMovies'])){
             include ('../db.php');
+
             
             $name = $_POST['name'];
             $genre = $_POST['genre'];
