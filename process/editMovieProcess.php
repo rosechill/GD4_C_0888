@@ -1,31 +1,20 @@
 <?php
-        
-
-       
-
-        // $query = mysqli_query("UPDATE movies SET name='$name', genre='$genre', season='$season', synopsis='$synopsis' WHERE id='$id'");
-        // $query = mysqli_query($con, "UPDATE movies(name, genre, realese, season, synopsis) SET ('$name', '$genre', '$realese', '$season', '$synopsis')");
-        // $query = mysqli_query("UPDATE movies SET name='$name', genre='$genre', season='$season', synopsis='$synopsis' WHERE id='$id'");
-        // $query = mysqli_query($con,
-        //     "UPDATE movies(name, genre, realese, season, synopsis)
-        //         VALUES
-        //     ('$name', '$genre', '$realese', '$season', '$synopsis')");
-
-        // $sql = "UPDATE movies SET name='$name', genre='$genre', season='$season', synopsis='$synopsis' WHERE id='$id'";
-
-        // session_start();
         if(isset($_POST['editMovies'])){
             include ('../db.php');
 
-            
+            // $id = $_POST['id'];
+            session_start();
+            $id = $_SESSION['movies']['id'];
             $name = $_POST['name'];
             $genre = $_POST['genre'];
             $realese = $_POST['realese'];
             $season = $_POST['season'];
             $synopsis = $_POST['synopsis'];
             
-            $id = $_GET['id'];
-            $query = mysqli_query($con, "UPDATE FROM movies SET name='$name', genre='$genre', season='$season', synopsis='$synopsis' WHERE id='$id'");
+            
+            $query = mysqli_query($con, "UPDATE movies SET name='$name', genre='$genre', 
+                                        realese ='$realese', season='$season', synopsis='$synopsis' WHERE id='$id';")
+                                        or die(mysqli_error($con));
             if($query){
                 echo
                 '<script>
@@ -38,9 +27,10 @@
                 </script>';
             }
         }else{
-            echo
-            '<script>
-            alert("ga masuk");window.history.back()
-            </script>';
+                echo
+                '<script>
+                alert("ga masuk");window.history.back()
+                </script>';
         }
+
 ?>
